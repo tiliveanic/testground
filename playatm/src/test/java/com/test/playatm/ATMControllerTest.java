@@ -34,7 +34,6 @@ public class ATMControllerTest {
 		TransactionRequest request = new TransactionRequest();
 		request.setAccount("123asd");
 		request.setAmount(100);
-		request.setPin("0000");
 		request.setType(TransactionRequest.Type.DEPOSIT);
 
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -42,7 +41,8 @@ public class ATMControllerTest {
 
 		mvc.perform(MockMvcRequestBuilders.post("/transaction").accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON_VALUE).content(json)).andExpect(status().isOk())
-				.andExpect(content().string(equalTo("{\"details\":\"work in progres\",\"type\":\"NOK\"}")));
-	
+				.andExpect(content().string(equalTo(
+						"{\"details\":\"Account status :Account [id=123asd, balanace=100][Ticket 0\",\"type\":\"OK\"}")));
+
 	}
 }

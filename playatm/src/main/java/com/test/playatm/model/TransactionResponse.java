@@ -17,6 +17,11 @@ public class TransactionResponse {
 		this.details = details;
 	}
 
+	public TransactionResponse appendDetails(String extra) {
+		this.details = this.details + extra;
+		return this;
+	}
+
 	public Type getType() {
 		return type;
 	}
@@ -33,6 +38,5 @@ public class TransactionResponse {
 	public String toString() {
 		return "TransactionResponse [details=" + details + ", type=" + type + "]";
 	}
-	
-	
+
 }

@@ -7,8 +7,6 @@ public class TransactionRequest {
 	@JsonProperty
 	private String account;
 	@JsonProperty
-	private String pin;
-	@JsonProperty
 	private long amount;
 	@JsonProperty
 	private Type type;
@@ -19,14 +17,6 @@ public class TransactionRequest {
 
 	public void setAccount(String account) {
 		this.account = account;
-	}
-
-	public String getPin() {
-		return pin;
-	}
-
-	public void setPin(String pin) {
-		this.pin = pin;
 	}
 
 	public long getAmount() {
@@ -46,15 +36,23 @@ public class TransactionRequest {
 	}
 
 	public enum Type {
-		DEPOSIT, WITDHRAW;
+		DEPOSIT(Account::deposit), WITDHRAW(Account::withdraw);
+
+		private AccountOperation operation;
+
+		private Type(AccountOperation operation) {
+			this.operation = operation;
+		}
+
+		public AccountOperation getOperation() {
+			return operation;
+		}
+
 	}
 
 	@Override
 	public String toString() {
-		return "TransactionRequest [account=" + account + ", pin=" + pin + ", amount=" + amount + ", type=" + type
-				+ "]";
+		return "TransactionRequest [account=" + account + ", amount=" + amount + ", type=" + type + "]";
 	}
-	
-	
 
 }
