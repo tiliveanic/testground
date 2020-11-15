@@ -20,12 +20,12 @@ public class AccountOperationTest {
 		AccountOperation withdraw = TransactionRequest.Type.WITDHRAW.getOperation();
 
 		assertTrue(deposit.operation(a, Long.valueOf(100)));
-		assertEquals(Long.valueOf(100), a.getBalanace());
+		assertEquals(Long.valueOf(100), a.getBalance());
 
 		assertTrue(withdraw.operation(a, Long.valueOf(1)));
-		assertEquals(Long.valueOf(99), a.getBalanace());
+		assertEquals(Long.valueOf(99), a.getBalance());
 
 		assertFalse(withdraw.operation(a, Long.valueOf(100)));
-		assertEquals(Long.valueOf(99), a.getBalanace());
+		assertEquals(Long.valueOf(99), a.getBalance());
 	}
 }

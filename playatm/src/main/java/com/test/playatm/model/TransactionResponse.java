@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TransactionResponse {
 
 	@JsonProperty
-	public String details;
+	private String details;
 	@JsonProperty
-	public Type type;
+	private Type type;
 
 	public String getDetails() {
 		return details;

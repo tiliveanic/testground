@@ -45,7 +45,7 @@ public class TransactionService {
 			CompletableFuture.supplyAsync(() -> {
 				return acountRepository.processTransaction(current.getValue());
 			}, acountRepository.getExecutionPoll()).thenApplyAsync(t -> {
-				return t.appendDetails("[Ticket " + current.getKey());
+				return t.appendDetails("[Ticket " + current.getKey() + "]");
 			}).thenAcceptAsync(t -> {
 				transactionBus.submitResponse(current.getKey(), t);
 			});

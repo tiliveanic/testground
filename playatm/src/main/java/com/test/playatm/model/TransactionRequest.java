@@ -11,6 +11,13 @@ public class TransactionRequest {
 	@JsonProperty
 	private Type type;
 
+	public TransactionRequest(String account, long amount, Type type) {
+		super();
+		this.account = account;
+		this.amount = amount;
+		this.type = type;
+	}
+
 	public String getAccount() {
 		return account;
 	}

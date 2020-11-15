@@ -31,10 +31,7 @@ public class ATMControllerTest {
 	@Test
 	public void transaction() throws Exception {
 
-		TransactionRequest request = new TransactionRequest();
-		request.setAccount("123asd");
-		request.setAmount(100);
-		request.setType(TransactionRequest.Type.DEPOSIT);
+		TransactionRequest request = new TransactionRequest("123asd", 100, TransactionRequest.Type.DEPOSIT);
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(request);
@@ -42,7 +39,17 @@ public class ATMControllerTest {
 		mvc.perform(MockMvcRequestBuilders.post("/transaction").accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON_VALUE).content(json)).andExpect(status().isOk())
 				.andExpect(content().string(equalTo(
-						"{\"details\":\"Account status :Account [id=123asd, balanace=100][Ticket 0\",\"type\":\"OK\"}")));
+						"{\"details\":\"Account status :Account [id=123asd, balance=100][Ticket 0]\",\"type\":\"OK\"}")));
+		
+		
+		request  = new TransactionRequest("123asd", 5, TransactionRequest.Type.WITDHRAW);
+		
+		json = objectMapper.writeValueAsString(request);
+		
+		mvc.perform(MockMvcRequestBuilders.post("/transaction").accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON_VALUE).content(json)).andExpect(status().isOk())
+				.andExpect(content().string(equalTo(
+						"{\"details\":\"Account status :Account [id=123asd, balance=95][Ticket 1]\",\"type\":\"OK\"}")));
 
 	}
 }
