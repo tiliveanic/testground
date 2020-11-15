@@ -66,6 +66,17 @@ class LoadTest {
 	}
 
 	@Test
+	void doTimeout() {
+
+		Integer ticket = transactionBus.submitTransaction(new TransactionRequest("waitTimeout", 2, Type.WITDHRAW));
+				
+		
+		TransactionResponse timeOut = transactionBus.getTransactionResponse(ticket);
+		assertEquals(TransactionResponse.Type.NOK, timeOut.getType());
+		assertEquals("Timeout waiting for the transaction response.", timeOut.getDetails());
+	}
+
+	@Test
 	void doManyTransactions() {
 
 		// prepare

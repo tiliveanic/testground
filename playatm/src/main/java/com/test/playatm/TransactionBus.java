@@ -43,7 +43,7 @@ public class TransactionBus {
 	public TransactionResponse getTransactionResponse(Integer ticket) {
 		TransactionResponse response;
 		try {
-			response = responses.get(ticket).poll(60, TimeUnit.SECONDS);
+			response = responses.get(ticket).poll(30, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
 			LOGGER.error("Exception retrieving response.");
 			response = new TransactionResponse();
