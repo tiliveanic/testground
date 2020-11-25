@@ -28,6 +28,7 @@ public class Stakes {
 		}, executor);
 	}
 
+	// not nice synchronizing the whole method - but i need this.
 	private synchronized void prepareStakes() {
 
 		// start from what we have
@@ -44,7 +45,7 @@ public class Stakes {
 			// there is a stake from this customer
 			if (candidateStakesMap.get(currentStake.getCustomerId()) != null) {
 				// is it better - replace the existing stake // otherwise ignore it
-				if (candidateStakesMap.get(currentStake.getCustomerId()).getStake() < currentStake.getStake()) {
+				if (candidateStakesMap.get(currentStake.getCustomerId()).getStake() > currentStake.getStake()) {
 					candidateStakesMap.put(currentStake.getCustomerId(), currentStake);
 					changed = true;
 				}
