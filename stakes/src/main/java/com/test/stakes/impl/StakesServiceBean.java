@@ -1,5 +1,6 @@
 package com.test.stakes.impl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -27,7 +28,8 @@ public class StakesServiceBean implements StakesService {
 	}
 
 	public List<Stake> getHighStakes(int betId) {
-		return stakes.get(Integer.valueOf(betId)).getBestStakes();
+		Stakes stakesForBet = stakes.get(Integer.valueOf(betId));
+		return stakesForBet!= null ? stakesForBet.getBestStakes() : Collections.EMPTY_LIST;
 	}
 
 }

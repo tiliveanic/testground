@@ -6,7 +6,7 @@ public class StakesComparator implements Comparator<Stake> {
 
 	@Override
 	public int compare(Stake o1, Stake o2) {
-		return o1.getStakeInteger().compareTo(o2.getStakeInteger());
+		return o2.getStakeInteger().compareTo(o1.getStakeInteger());
 	}
 
 }

@@ -22,6 +22,8 @@ public class TestStakesServiceBean {
 	@Test
 	public void testBasic() throws InterruptedException
 	{
+		assertEquals("[]", stakesService.getHighStakes(100).toString());
+		
 		stakesService.postStake("100", 100, 50);
 		stakesService.postStake("100", 100, 49);
 		stakesService.postStake("100", 100, 49);
@@ -36,13 +38,14 @@ public class TestStakesServiceBean {
 
 		
 		stakesService.postStake("102", 100, 30);
+		
 		stakesService.postStake("103", 100, 20);
 		stakesService.postStake("103", 100, 20);
 		stakesService.postStake("103", 100, 20);
 		stakesService.postStake("103", 100, 20);
 		stakesService.postStake("103", 100, 19);
-		Thread.sleep(1000);
-		assertEquals("[103=19, 102=30, 101=40]", stakesService.getHighStakes(100).toString());
+		Thread.sleep(2000);
+		assertEquals("[100=51, 101=44, 102=30]", stakesService.getHighStakes(100).toString());
 		System.out.println(stakesService.getHighStakes(100));	
 	}
 
